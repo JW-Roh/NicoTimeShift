@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1AF53124191ACA9800E45290 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF53123191ACA9800E45290 /* Cocoa.framework */; };
+		1AF5312E191ACA9800E45290 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5312C191ACA9800E45290 /* InfoPlist.strings */; };
+		1AF53130191ACA9800E45290 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5312F191ACA9800E45290 /* main.m */; };
+		1AF53134191ACA9800E45290 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1AF53132191ACA9800E45290 /* Credits.rtf */; };
+		1AF53137191ACA9800E45290 /* NTSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF53136191ACA9800E45290 /* NTSAppDelegate.m */; };
+		1AF5313A191ACA9800E45290 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF53138191ACA9800E45290 /* MainMenu.xib */; };
+		1AF5313C191ACA9800E45290 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5313B191ACA9800E45290 /* Images.xcassets */; };
+		1AF53143191ACA9800E45290 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF53142191ACA9800E45290 /* XCTest.framework */; };
+		1AF53144191ACA9800E45290 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF53123191ACA9800E45290 /* Cocoa.framework */; };
+		1AF5314C191ACA9800E45290 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5314A191ACA9800E45290 /* InfoPlist.strings */; };
+		1AF5314E191ACA9800E45290 /* NicoTimeShiftTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5314D191ACA9800E45290 /* NicoTimeShiftTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1AF53145191ACA9800E45290 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AF53118191ACA9700E45290 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AF5311F191ACA9800E45290;
+			remoteInfo = NicoTimeShift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1AF53120191ACA9800E45290 /* NicoTimeShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NicoTimeShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AF53123191ACA9800E45290 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1AF53126191ACA9800E45290 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1AF53127191ACA9800E45290 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1AF53128191ACA9800E45290 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1AF5312B191ACA9800E45290 /* NicoTimeShift-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NicoTimeShift-Info.plist"; sourceTree = "<group>"; };
+		1AF5312D191ACA9800E45290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1AF5312F191ACA9800E45290 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1AF53131191ACA9800E45290 /* NicoTimeShift-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NicoTimeShift-Prefix.pch"; sourceTree = "<group>"; };
+		1AF53133191ACA9800E45290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		1AF53135191ACA9800E45290 /* NTSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTSAppDelegate.h; sourceTree = "<group>"; };
+		1AF53136191ACA9800E45290 /* NTSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NTSAppDelegate.m; sourceTree = "<group>"; };
+		1AF53139191ACA9800E45290 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1AF5313B191ACA9800E45290 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1AF53141191ACA9800E45290 /* NicoTimeShiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NicoTimeShiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AF53142191ACA9800E45290 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1AF53149191ACA9800E45290 /* NicoTimeShiftTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NicoTimeShiftTests-Info.plist"; sourceTree = "<group>"; };
+		1AF5314B191ACA9800E45290 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1AF5314D191ACA9800E45290 /* NicoTimeShiftTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NicoTimeShiftTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1AF5311D191ACA9800E45290 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF53124191ACA9800E45290 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AF5313E191ACA9800E45290 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF53144191ACA9800E45290 /* Cocoa.framework in Frameworks */,
+				1AF53143191ACA9800E45290 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1AF53117191ACA9700E45290 = {
+			isa = PBXGroup;
+			children = (
+				1AF53129191ACA9800E45290 /* NicoTimeShift */,
+				1AF53147191ACA9800E45290 /* NicoTimeShiftTests */,
+				1AF53122191ACA9800E45290 /* Frameworks */,
+				1AF53121191ACA9800E45290 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1AF53121191ACA9800E45290 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AF53120191ACA9800E45290 /* NicoTimeShift.app */,
+				1AF53141191ACA9800E45290 /* NicoTimeShiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1AF53122191ACA9800E45290 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AF53123191ACA9800E45290 /* Cocoa.framework */,
+				1AF53142191ACA9800E45290 /* XCTest.framework */,
+				1AF53125191ACA9800E45290 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1AF53125191ACA9800E45290 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1AF53126191ACA9800E45290 /* AppKit.framework */,
+				1AF53127191ACA9800E45290 /* CoreData.framework */,
+				1AF53128191ACA9800E45290 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1AF53129191ACA9800E45290 /* NicoTimeShift */ = {
+			isa = PBXGroup;
+			children = (
+				1AF53135191ACA9800E45290 /* NTSAppDelegate.h */,
+				1AF53136191ACA9800E45290 /* NTSAppDelegate.m */,
+				1AF53138191ACA9800E45290 /* MainMenu.xib */,
+				1AF5313B191ACA9800E45290 /* Images.xcassets */,
+				1AF5312A191ACA9800E45290 /* Supporting Files */,
+			);
+			path = NicoTimeShift;
+			sourceTree = "<group>";
+		};
+		1AF5312A191ACA9800E45290 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1AF5312B191ACA9800E45290 /* NicoTimeShift-Info.plist */,
+				1AF5312C191ACA9800E45290 /* InfoPlist.strings */,
+				1AF5312F191ACA9800E45290 /* main.m */,
+				1AF53131191ACA9800E45290 /* NicoTimeShift-Prefix.pch */,
+				1AF53132191ACA9800E45290 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AF53147191ACA9800E45290 /* NicoTimeShiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				1AF5314D191ACA9800E45290 /* NicoTimeShiftTests.m */,
+				1AF53148191ACA9800E45290 /* Supporting Files */,
+			);
+			path = NicoTimeShiftTests;
+			sourceTree = "<group>";
+		};
+		1AF53148191ACA9800E45290 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1AF53149191ACA9800E45290 /* NicoTimeShiftTests-Info.plist */,
+				1AF5314A191ACA9800E45290 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1AF5311F191ACA9800E45290 /* NicoTimeShift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AF53151191ACA9800E45290 /* Build configuration list for PBXNativeTarget "NicoTimeShift" */;
+			buildPhases = (
+				1AF5311C191ACA9800E45290 /* Sources */,
+				1AF5311D191ACA9800E45290 /* Frameworks */,
+				1AF5311E191ACA9800E45290 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NicoTimeShift;
+			productName = NicoTimeShift;
+			productReference = 1AF53120191ACA9800E45290 /* NicoTimeShift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1AF53140191ACA9800E45290 /* NicoTimeShiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AF53154191ACA9800E45290 /* Build configuration list for PBXNativeTarget "NicoTimeShiftTests" */;
+			buildPhases = (
+				1AF5313D191ACA9800E45290 /* Sources */,
+				1AF5313E191ACA9800E45290 /* Frameworks */,
+				1AF5313F191ACA9800E45290 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1AF53146191ACA9800E45290 /* PBXTargetDependency */,
+			);
+			name = NicoTimeShiftTests;
+			productName = NicoTimeShiftTests;
+			productReference = 1AF53141191ACA9800E45290 /* NicoTimeShiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1AF53118191ACA9700E45290 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NTS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = deVbug;
+				TargetAttributes = {
+					1AF53140191ACA9800E45290 = {
+						TestTargetID = 1AF5311F191ACA9800E45290;
+					};
+				};
+			};
+			buildConfigurationList = 1AF5311B191ACA9700E45290 /* Build configuration list for PBXProject "NicoTimeShift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1AF53117191ACA9700E45290;
+			productRefGroup = 1AF53121191ACA9800E45290 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1AF5311F191ACA9800E45290 /* NicoTimeShift */,
+				1AF53140191ACA9800E45290 /* NicoTimeShiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1AF5311E191ACA9800E45290 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF5312E191ACA9800E45290 /* InfoPlist.strings in Resources */,
+				1AF5313C191ACA9800E45290 /* Images.xcassets in Resources */,
+				1AF53134191ACA9800E45290 /* Credits.rtf in Resources */,
+				1AF5313A191ACA9800E45290 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AF5313F191ACA9800E45290 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF5314C191ACA9800E45290 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1AF5311C191ACA9800E45290 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF53137191ACA9800E45290 /* NTSAppDelegate.m in Sources */,
+				1AF53130191ACA9800E45290 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1AF5313D191ACA9800E45290 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AF5314E191ACA9800E45290 /* NicoTimeShiftTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1AF53146191ACA9800E45290 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AF5311F191ACA9800E45290 /* NicoTimeShift */;
+			targetProxy = 1AF53145191ACA9800E45290 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1AF5312C191ACA9800E45290 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF5312D191ACA9800E45290 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1AF53132191ACA9800E45290 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF53133191ACA9800E45290 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		1AF53138191ACA9800E45290 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF53139191ACA9800E45290 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		1AF5314A191ACA9800E45290 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1AF5314B191ACA9800E45290 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1AF5314F191ACA9800E45290 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1AF53150191ACA9800E45290 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1AF53152191ACA9800E45290 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NicoTimeShift/NicoTimeShift-Prefix.pch";
+				INFOPLIST_FILE = "NicoTimeShift/NicoTimeShift-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1AF53153191ACA9800E45290 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NicoTimeShift/NicoTimeShift-Prefix.pch";
+				INFOPLIST_FILE = "NicoTimeShift/NicoTimeShift-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1AF53155191ACA9800E45290 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicoTimeShift.app/Contents/MacOS/NicoTimeShift";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NicoTimeShift/NicoTimeShift-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NicoTimeShiftTests/NicoTimeShiftTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		1AF53156191ACA9800E45290 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicoTimeShift.app/Contents/MacOS/NicoTimeShift";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NicoTimeShift/NicoTimeShift-Prefix.pch";
+				INFOPLIST_FILE = "NicoTimeShiftTests/NicoTimeShiftTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1AF5311B191ACA9700E45290 /* Build configuration list for PBXProject "NicoTimeShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF5314F191ACA9800E45290 /* Debug */,
+				1AF53150191ACA9800E45290 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1AF53151191ACA9800E45290 /* Build configuration list for PBXNativeTarget "NicoTimeShift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF53152191ACA9800E45290 /* Debug */,
+				1AF53153191ACA9800E45290 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1AF53154191ACA9800E45290 /* Build configuration list for PBXNativeTarget "NicoTimeShiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AF53155191ACA9800E45290 /* Debug */,
+				1AF53156191ACA9800E45290 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1AF53118191ACA9700E45290 /* Project object */;
+}
