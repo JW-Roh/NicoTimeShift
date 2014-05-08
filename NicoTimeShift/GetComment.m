@@ -31,7 +31,9 @@
     
     lv = [[NSString alloc]initWithString: lvNum];
     isOpen = NO;
+	startOfComment = NO;
     self.keepString = @"";
+	self.waybackKey = nil;
     [self getUserSession:browser];
     
     [self getXml];//,@"didn't get xml.");
@@ -176,7 +178,7 @@
 	NSError *error;
 	NSString *a_home_dir = NSHomeDirectory();
 	NSString *path = [NSString stringWithFormat:@"%@/comment_%@.xml", a_home_dir, lv];
-	NSString *empty = @"<?xml version='1.0' encoding='UTF-8'?>\n<packet>\n";
+	NSString *empty = @"";
 	[empty writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
 	
     //get addr, port, threadId
@@ -229,7 +231,7 @@
     
     temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/base_time/text()" error:&error];
     NSAssert([temp count] == 1, @"base_time is not one.");
-    NSInteger baseTime = [[[temp objectAtIndex:0] stringValue]integerValue];
+    baseTime = [[[temp objectAtIndex:0] stringValue]integerValue];
     NSLog(@"baseTime : %ld", baseTime);
     temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/open_time/text()" error:&error];
     NSAssert([temp count] == 1, @"open_time is not one.");
@@ -238,13 +240,17 @@
     temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/start_time/text()" error:&error];
     NSAssert([temp count] == 1, @"start_time is not one.");
     NSInteger startTime = [[[temp objectAtIndex:0] stringValue]integerValue];
+	temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/end_time/text()" error:&error];
+    NSAssert([temp count] == 1, @"start_time is not one.");
+    NSInteger endTime = [[[temp objectAtIndex:0] stringValue]integerValue];
     
     testTime = startTime - baseTime;
     NSLog(@"baseTime : %ld", baseTime);
     NSLog(@"startTime : %ld", startTime);
     NSLog(@"testTime : %ld", testTime);
+	NSLog(@"endTime : %ld", endTime);
 	
-	currentTime = baseTime;
+	currentTime = endTime + 200;
 	
 	queSheetTime = 0;
 	temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/quesheet/que/@vpos" error:&error];
@@ -591,73 +597,120 @@
                 
                 NSString *dockString = [NSString stringWithFormat:@"<xml>%@%@</xml>", self.keepString, front];
 				
-				NSMutableString *appendString = [NSMutableString string];
+				self.keepString = rear;
+				
+				BOOL needGetCurrTime = NO;
+				if (dumpedString == nil) {
+					dumpedString = [[NSMutableString alloc] initWithFormat:@""];
+					needGetCurrTime = YES;
+				}
                 
                 NSError *error;
                 NSXMLDocument *xmlDoc = [[NSXMLDocument alloc]initWithXMLString:dockString options:NSXMLNodeOptionsNone error:&error];
                 
-                NSArray *temp = [xmlDoc nodesForXPath:@"/xml/chat/@vpos" error:&error];
-                for (NSXMLNode *node in temp) {
-					if ([vposArray containsObject:[node stringValue]]) {
-						continue;
-					}
-					
-                    [vposArray addObject:[node stringValue]];
-                    //NSLog(@"vpos : %@", [node stringValue]);
-					
-					NSArray *temp2 = [xmlDoc nodesForXPath:[NSString stringWithFormat:@"/xml/chat[@vpos=\"%@\"]", [node stringValue]] error:&error];
-					NSString *temp3 = [[temp2[0] description] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"\"%@\"", [node stringValue]]
-																						withString:[NSString stringWithFormat:@"\"%ld\"", [[node stringValue] integerValue] + queSheetTime]];
-					[appendString appendFormat:@"%@\n", temp3];
-                }
+                NSArray *temp = [xmlDoc nodesForXPath:@"/xml/chat" error:&error];
 				
-				temp = [xmlDoc nodesForXPath:@"/xml/chat/text()" error:&error];
-                for (NSXMLNode *node in temp) {
-                    [commentArray addObject:[node stringValue]];
-                    //NSLog(@"comment : %@", [node stringValue]);
-                }
-				
-				BOOL isStartup = NO;
-				if ([temp count] == 1 && [[temp[0] stringValue] hasPrefix:@"/play "])
-					isStartup = YES;
-                
-                temp = [xmlDoc nodesForXPath:@"/xml/chat[@premium=\"2\" and text()=\"/disconnect\"]" error:&error];
-                [xmlDoc release];
-                
-                if([temp count] != 0){
-                    [self socketClose];
-                    
-                    NSLog(@"commentArray count : %lu", [vposArray count]);
-                    NSLog(@"OK");
-					
-#if DEBUG
-					[self.delegate stopIndicator];
-#endif
-					
-					[appendString appendFormat:@"</packet>\n"];
+				if (temp.count == 0) {
+					NSLog(@"XML node count is 0\n%@\n", dockString);
+					[xmlDoc release];
+					break;
 				}
 				
-				if (isOpen && ![(NSInputStream *)stream hasBytesAvailable])
+				if (needGetCurrTime) {
+					NSArray *dates = [xmlDoc nodesForXPath:@"/xml/chat/@date" error:&error];
+					
+					currentTime = [[dates[0] stringValue] integerValue];
+				}
+				NSString *curTimeStr = [NSString stringWithFormat:@"%ld", currentTime];
+				
+                for (NSXMLElement *node in temp) {
+					[commentArray addObject:[node stringValue]];
+                    //NSLog(@"comment : %@", [node stringValue]);
+					
+					NSXMLNode *date = [node attributeForName:@"date"];
+					
+					if (![[date stringValue] isEqualToString:curTimeStr]) {
+						NSXMLNode *vpos = [node attributeForName:@"vpos"];
+						
+						NSString *temp3 = [[node description] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"\"%@\"", [vpos stringValue]]
+																						withString:[NSString stringWithFormat:@"\"%ld\"", [[vpos stringValue] integerValue] + queSheetTime]];
+						[dumpedString appendFormat:@"%@\n", temp3];
+						
+						[vposArray addObject:[node stringValue]];
+					}
+                }
+				
+				if ([[temp[0] stringValue] hasPrefix:@"/play "]) {
+					NSMutableString *tempString = [NSMutableString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8'?>\n<packet>\n"];
+					
+					for (NSXMLElement *node in temp) {
+						NSXMLNode *date = [node attributeForName:@"date"];
+						
+						if ([[date stringValue] isEqualToString:curTimeStr]) {
+							NSXMLNode *vpos = [node attributeForName:@"vpos"];
+							
+							NSString *temp3 = [[node description] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"\"%@\"", [vpos stringValue]]
+																							withString:[NSString stringWithFormat:@"\"%ld\"", [[vpos stringValue] integerValue] + queSheetTime]];
+							[tempString appendFormat:@"%@\n", temp3];
+							
+							[vposArray addObject:[node stringValue]];
+						}
+					}
+					
+                    [dumpedString insertString:tempString atIndex:0];
+					
+					startOfComment = YES;
+					
+					NSLog(@"detect start of comments");
+				}
+				
+				temp = [xmlDoc nodesForXPath:@"/xml/chat[@premium=\"2\" and text()=\"/disconnect\"]" error:&error];
+                [xmlDoc release];
+                
+				BOOL endOfComment = NO;
+                if([temp count] != 0){
+					[dumpedString appendFormat:@"</packet>\n"];
+					endOfComment = YES;
+					
+					NSLog(@"detect end of comments");
+				}
+				
+				if (isOpen && ![(NSInputStream *)stream hasBytesAvailable] && !endOfComment)
 					usleep(500*1000);
 				
-				if (isOpen && ![(NSInputStream *)stream hasBytesAvailable]) {// && ([commentArray count] > 900 || isStartup || [commentArray count] == 0)) {
+				if (endOfComment || (isOpen && ![(NSInputStream *)stream hasBytesAvailable])) {
 					//NSLog(@"commentArray count : %lu", [commentArray count]);
-					
-					currentTime += 60;
 					
 					[commentArray removeAllObjects];
 					
-					[self requestComments];
+					NSString *a_home_dir = NSHomeDirectory();
+					NSString *path = [NSString stringWithFormat:@"%@/comment_%@.xml", a_home_dir, lv];
+					
+					NSMutableString *contents = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+					
+					[contents insertString:dumpedString atIndex:0];
+					[contents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+					
+					self.keepString = [NSString stringWithFormat:@"%@", rear ?: @""];
+					
+					[dumpedString release];
+					dumpedString = nil;
+					
+					currentTime++;
+					
+					if (startOfComment) {
+						[self socketClose];
+						
+						NSLog(@"commentArray count : %lu", [vposArray count]);
+						NSLog(@"OK");
+						
+#if DEBUG
+						[self.delegate stopIndicator];
+#endif
+					}
+					else
+						[self requestComments];
 				}
-                
-				NSString *a_home_dir = NSHomeDirectory();
-				NSString *path = [NSString stringWithFormat:@"%@/comment_%@.xml", a_home_dir, lv];
-			
-				NSFileHandle *aFileHandle = [NSFileHandle fileHandleForWritingAtPath:path];
-				[aFileHandle truncateFileAtOffset:[aFileHandle seekToEndOfFile]];
-				[aFileHandle writeData:[appendString dataUsingEncoding:NSUTF8StringEncoding]];
-				
-				self.keepString = [NSString stringWithFormat:@"%@", rear ?: @""];
             }
             
             
@@ -680,6 +733,7 @@
 			alreadyReq = YES;
 			
 			if (isOpen == YES) {
+				//lv175525659
 				//lv176928469
 				[self requestComments];
                 

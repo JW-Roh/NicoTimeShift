@@ -24,8 +24,12 @@
     NSInteger port;
     NSString *lv;
 	NSInteger comment_count;
+	NSInteger baseTime;
 	NSInteger currentTime;
 	NSInteger queSheetTime;
+	BOOL startOfComment;
+	
+	NSMutableString *dumpedString;
     
     NSInputStream *inputStream;
 	NSOutputStream *outputStream;
