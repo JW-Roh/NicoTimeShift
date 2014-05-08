@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4DD5B9191ACC94001364DA /* GetComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DD5B8191ACC94001364DA /* GetComment.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1A4DD5BB191ACCF6001364DA /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DD5BA191ACCF6001364DA /* libicucore.A.dylib */; };
+		1A4DD5BE191ACDDD001364DA /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4DD5BD191ACDDD001364DA /* libsqlite3.0.dylib */; };
+		1A4DD5C0191AD304001364DA /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DD5BF191AD304001364DA /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1A4DD5C3191AD3D8001364DA /* _rtmpdump in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DD5C2191AD3D8001364DA /* _rtmpdump */; };
 		1AF53124191ACA9800E45290 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF53123191ACA9800E45290 /* Cocoa.framework */; };
 		1AF5312E191ACA9800E45290 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AF5312C191ACA9800E45290 /* InfoPlist.strings */; };
 		1AF53130191ACA9800E45290 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF5312F191ACA9800E45290 /* main.m */; };
@@ -31,6 +36,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4DD5B7191ACC94001364DA /* GetComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetComment.h; sourceTree = "<group>"; };
+		1A4DD5B8191ACC94001364DA /* GetComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetComment.m; sourceTree = "<group>"; };
+		1A4DD5BA191ACCF6001364DA /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		1A4DD5BC191ACD83001364DA /* RegexKitLite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		1A4DD5BD191ACDDD001364DA /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		1A4DD5BF191AD304001364DA /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		1A4DD5C2191AD3D8001364DA /* _rtmpdump */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = _rtmpdump; sourceTree = "<group>"; };
 		1AF53120191ACA9800E45290 /* NicoTimeShift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NicoTimeShift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF53123191ACA9800E45290 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1AF53126191ACA9800E45290 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -57,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4DD5BE191ACDDD001364DA /* libsqlite3.0.dylib in Frameworks */,
+				1A4DD5BB191ACCF6001364DA /* libicucore.A.dylib in Frameworks */,
 				1AF53124191ACA9800E45290 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4DD5C1191AD3C8001364DA /* res */ = {
+			isa = PBXGroup;
+			children = (
+				1A4DD5C2191AD3D8001364DA /* _rtmpdump */,
+			);
+			name = res;
+			path = NicoTimeShift;
+			sourceTree = "<group>";
+		};
 		1AF53117191ACA9700E45290 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +103,7 @@
 				1AF53147191ACA9800E45290 /* NicoTimeShiftTests */,
 				1AF53122191ACA9800E45290 /* Frameworks */,
 				1AF53121191ACA9800E45290 /* Products */,
+				1A4DD5C1191AD3C8001364DA /* res */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +119,8 @@
 		1AF53122191ACA9800E45290 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A4DD5BD191ACDDD001364DA /* libsqlite3.0.dylib */,
+				1A4DD5BA191ACCF6001364DA /* libicucore.A.dylib */,
 				1AF53123191ACA9800E45290 /* Cocoa.framework */,
 				1AF53142191ACA9800E45290 /* XCTest.framework */,
 				1AF53125191ACA9800E45290 /* Other Frameworks */,
@@ -115,6 +141,10 @@
 		1AF53129191ACA9800E45290 /* NicoTimeShift */ = {
 			isa = PBXGroup;
 			children = (
+				1A4DD5BC191ACD83001364DA /* RegexKitLite.h */,
+				1A4DD5BF191AD304001364DA /* RegexKitLite.m */,
+				1A4DD5B7191ACC94001364DA /* GetComment.h */,
+				1A4DD5B8191ACC94001364DA /* GetComment.m */,
 				1AF53135191ACA9800E45290 /* NTSAppDelegate.h */,
 				1AF53136191ACA9800E45290 /* NTSAppDelegate.m */,
 				1AF53138191ACA9800E45290 /* MainMenu.xib */,
@@ -232,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF5312E191ACA9800E45290 /* InfoPlist.strings in Resources */,
+				1A4DD5C3191AD3D8001364DA /* _rtmpdump in Resources */,
 				1AF5313C191ACA9800E45290 /* Images.xcassets in Resources */,
 				1AF53134191ACA9800E45290 /* Credits.rtf in Resources */,
 				1AF5313A191ACA9800E45290 /* MainMenu.xib in Resources */,
@@ -253,7 +284,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4DD5B9191ACC94001364DA /* GetComment.m in Sources */,
 				1AF53137191ACA9800E45290 /* NTSAppDelegate.m in Sources */,
+				1A4DD5C0191AD304001364DA /* RegexKitLite.m in Sources */,
 				1AF53130191ACA9800E45290 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +500,7 @@
 				1AF53153191ACA9800E45290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1AF53154191ACA9800E45290 /* Build configuration list for PBXNativeTarget "NicoTimeShiftTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +509,7 @@
 				1AF53156191ACA9800E45290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
