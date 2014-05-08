@@ -34,6 +34,7 @@
 	startOfComment = NO;
     self.keepString = @"";
 	self.waybackKey = nil;
+	dumpedString = nil;
     [self getUserSession:browser];
     
     [self getXml];//,@"didn't get xml.");
@@ -782,6 +783,10 @@
     self.dataStream = nil;
     self.rtmpdumpPath = nil;
     self.TICKET = nil;
+	self.waybackKey = nil;
+	
+	[dumpedString release];
+	dumpedString = nil;
     
     [xml release];
     //[addr release];
