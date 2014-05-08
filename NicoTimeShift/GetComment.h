@@ -25,6 +25,7 @@
     NSString *lv;
 	NSInteger comment_count;
 	NSInteger currentTime;
+	NSInteger queSheetTime;
     
     NSInputStream *inputStream;
 	NSOutputStream *outputStream;

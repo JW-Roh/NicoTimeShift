@@ -238,13 +238,24 @@
     temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/start_time/text()" error:&error];
     NSAssert([temp count] == 1, @"start_time is not one.");
     NSInteger startTime = [[[temp objectAtIndex:0] stringValue]integerValue];
-    [xmlDoc release];
+    
     testTime = startTime - baseTime;
     NSLog(@"baseTime : %ld", baseTime);
     NSLog(@"startTime : %ld", startTime);
     NSLog(@"testTime : %ld", testTime);
 	
 	currentTime = baseTime;
+	
+	queSheetTime = 0;
+	temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/quesheet/que/@vpos" error:&error];
+	for (NSXMLNode *node in temp) {
+		if ([[node stringValue] integerValue] < queSheetTime)
+			queSheetTime = [[node stringValue] integerValue];
+	}
+	queSheetTime = ABS(queSheetTime);
+	NSLog(@"queSheetTime : %ld", queSheetTime);
+	
+	[xmlDoc release];
 	
 	return [self getWaybackKey];
 }
@@ -595,7 +606,9 @@
                     //NSLog(@"vpos : %@", [node stringValue]);
 					
 					NSArray *temp2 = [xmlDoc nodesForXPath:[NSString stringWithFormat:@"/xml/chat[@vpos=\"%@\"]", [node stringValue]] error:&error];
-					[appendString appendFormat:@"%@\n", temp2[0]];
+					NSString *temp3 = [[temp2[0] description] stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"\"%@\"", [node stringValue]]
+																						withString:[NSString stringWithFormat:@"\"%ld\"", [[node stringValue] integerValue] + queSheetTime]];
+					[appendString appendFormat:@"%@\n", temp3];
                 }
 				
 				temp = [xmlDoc nodesForXPath:@"/xml/chat/text()" error:&error];
@@ -621,7 +634,7 @@
 					[self.delegate stopIndicator];
 #endif
 					
-					[appendString appendFormat:@"\n</packet>\n"];
+					[appendString appendFormat:@"</packet>\n"];
 				}
 				
 				if (isOpen && ![(NSInputStream *)stream hasBytesAvailable])
