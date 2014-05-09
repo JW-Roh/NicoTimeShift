@@ -253,11 +253,15 @@
 	
 	currentTime = endTime + 200;
 	
-	queSheetTime = 0;
-	temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/quesheet/que/@vpos" error:&error];
-	for (NSXMLNode *node in temp) {
-		if ([[node stringValue] integerValue] < queSheetTime)
-			queSheetTime = [[node stringValue] integerValue];
+	queSheetTime = -currentTime;
+	temp = [xmlDoc nodesForXPath:@"/getplayerstatus/stream/quesheet/que" error:&error];
+	for (NSXMLElement *node in temp) {
+		if (![[node stringValue] hasPrefix:@"/publish "]) continue;
+		
+		NSXMLNode *vpos = [node attributeForName:@"vpos"];
+		
+		if ([[vpos stringValue] integerValue] > queSheetTime)
+			queSheetTime = [[vpos stringValue] integerValue];
 	}
 	queSheetTime = ABS(queSheetTime);
 	NSLog(@"queSheetTime : %ld", queSheetTime);
@@ -628,6 +632,8 @@
 					[commentArray addObject:[node stringValue]];
                     //NSLog(@"comment : %@", [node stringValue]);
 					
+					if ([[node stringValue] hasPrefix:@"/hb ifseetno "]) continue;
+					
 					NSXMLNode *date = [node attributeForName:@"date"];
 					
 					if (![[date stringValue] isEqualToString:curTimeStr]) {
@@ -645,6 +651,8 @@
 					NSMutableString *tempString = [NSMutableString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8'?>\n<packet>\n"];
 					
 					for (NSXMLElement *node in temp) {
+						if ([[node stringValue] hasPrefix:@"/hb ifseetno "]) continue;
+						
 						NSXMLNode *date = [node attributeForName:@"date"];
 						
 						if ([[date stringValue] isEqualToString:curTimeStr]) {
