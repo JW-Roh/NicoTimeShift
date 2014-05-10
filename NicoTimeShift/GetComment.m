@@ -554,9 +554,9 @@
             if (dataStream == nil) {
                 dataStream = [[NSMutableData alloc] init];
             }
-            uint8_t buf[102400];
+            uint8_t buf[1024];
             NSInteger len = 0;
-            len = [(NSInputStream *)stream read:buf maxLength:102400];
+            len = [(NSInputStream *)stream read:buf maxLength:1024];
             //            NSLog()
             if(len) {    
                 [dataStream appendBytes:(const void *)buf length:len];
@@ -647,7 +647,7 @@
 					}
                 }
 				
-				if ([[temp[0] stringValue] hasPrefix:@"/play "]) {
+				if (!startOfComment && [[temp[0] stringValue] hasPrefix:@"/play "]) {
 					NSMutableString *tempString = [NSMutableString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8'?>\n<packet>\n"];
 					
 					for (NSXMLElement *node in temp) {
