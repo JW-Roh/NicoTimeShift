@@ -698,6 +698,8 @@
 					NSMutableString *contents = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 					
 					[contents insertString:dumpedString atIndex:0];
+					if (startOfComment && !endOfComment)
+						[contents appendString:@"</packet>\n"];
 					[contents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];
 					
 					self.keepString = [NSString stringWithFormat:@"%@", rear ?: @""];
@@ -742,8 +744,6 @@
 			alreadyReq = YES;
 			
 			if (isOpen == YES) {
-				//lv175525659
-				//lv176928469
 				[self requestComments];
                 
             }	
