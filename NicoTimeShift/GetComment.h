@@ -28,15 +28,13 @@
 	NSInteger currentTime;
 	NSInteger queSheetTime;
 	BOOL startOfComment;
+	NSInteger chatTagCount;
 	
 	NSMutableString *dumpedString;
     
     NSInputStream *inputStream;
 	NSOutputStream *outputStream;
 	BOOL isOpen;
-    NSMutableArray *vposArray;
-    NSMutableArray *commentArray;
-    NSMutableArray *userIdArray;
     
     NSMutableArray *URL;
     

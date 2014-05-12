@@ -35,6 +35,7 @@
     self.keepString = @"";
 	self.waybackKey = nil;
 	dumpedString = nil;
+	chatTagCount = 0;
     [self getUserSession:browser];
     
     [self getXml];//,@"didn't get xml.");
@@ -293,9 +294,6 @@
 		[outputStream open];
         
         keepString = @"";
-        commentArray = [[NSMutableArray alloc]init];
-        vposArray = [[NSMutableArray alloc]init];
-        userIdArray = [[NSMutableArray alloc]init];
 		isOpen = YES;
 	}
 }
@@ -572,6 +570,9 @@
             //NSLog(@"str : %@", str);
             NSString *strReplace = [str stringByReplacingOccurrencesOfString:@"\0" withString:@"\n"];
             //NSLog(@"strReplace : %@",strReplace);
+			
+			NSRange rangeOfPing = [strReplace rangeOfString:@"<ping>EOT</ping>" options:NSBackwardsSearch];
+			if (rangeOfPing.location == NSNotFound) return;
             
             //XMLDocumentsにする
             
@@ -602,6 +603,8 @@
                 
                 NSString *dockString = [NSString stringWithFormat:@"<xml>%@%@</xml>", self.keepString, front];
 				
+				NSInteger curChatTagCount = 0;
+				
 				self.keepString = rear;
 				
 				BOOL needGetCurrTime = NO;
@@ -629,7 +632,6 @@
 				NSString *curTimeStr = [NSString stringWithFormat:@"%ld", currentTime];
 				
                 for (NSXMLElement *node in temp) {
-					[commentArray addObject:[node stringValue]];
                     //NSLog(@"comment : %@", [node stringValue]);
 					
 					if ([[node stringValue] hasPrefix:@"/hb ifseetno "]) continue;
@@ -643,7 +645,7 @@
 																						withString:[NSString stringWithFormat:@"\"%ld\"", [[vpos stringValue] integerValue] + queSheetTime]];
 						[dumpedString appendFormat:@"%@\n", temp3];
 						
-						[vposArray addObject:[node stringValue]];
+						curChatTagCount++;
 					}
                 }
 				
@@ -662,7 +664,7 @@
 																							withString:[NSString stringWithFormat:@"\"%ld\"", [[vpos stringValue] integerValue] + queSheetTime]];
 							[tempString appendFormat:@"%@\n", temp3];
 							
-							[vposArray addObject:[node stringValue]];
+							curChatTagCount++;
 						}
 					}
 					
@@ -684,44 +686,38 @@
 					NSLog(@"detect end of comments");
 				}
 				
-				if (isOpen && ![(NSInputStream *)stream hasBytesAvailable] && !endOfComment)
-					usleep(500*1000);
+				NSLog(@"%ld comments saved", curChatTagCount);
+				chatTagCount += curChatTagCount;
 				
-				if (endOfComment || (isOpen && ![(NSInputStream *)stream hasBytesAvailable])) {
-					//NSLog(@"commentArray count : %lu", [commentArray count]);
+				NSString *a_home_dir = NSHomeDirectory();
+				NSString *path = [NSString stringWithFormat:@"%@/comment_%@.xml", a_home_dir, lv];
+				
+				NSMutableString *contents = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+				
+				[contents insertString:dumpedString atIndex:0];
+				if (startOfComment && !endOfComment)
+					[contents appendString:@"</packet>\n"];
+				[contents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+				
+				self.keepString = [NSString stringWithFormat:@"%@", rear ?: @""];
+				
+				[dumpedString release];
+				dumpedString = nil;
+				
+				currentTime++;
+				
+				if (startOfComment) {
+					[self socketClose];
 					
-					[commentArray removeAllObjects];
+					NSLog(@"Total %lu comments saved", chatTagCount);
+					NSLog(@"OK");
 					
-					NSString *a_home_dir = NSHomeDirectory();
-					NSString *path = [NSString stringWithFormat:@"%@/comment_%@.xml", a_home_dir, lv];
-					
-					NSMutableString *contents = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-					
-					[contents insertString:dumpedString atIndex:0];
-					if (startOfComment && !endOfComment)
-						[contents appendString:@"</packet>\n"];
-					[contents writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];
-					
-					self.keepString = [NSString stringWithFormat:@"%@", rear ?: @""];
-					
-					[dumpedString release];
-					dumpedString = nil;
-					
-					currentTime++;
-					
-					if (startOfComment) {
-						[self socketClose];
-						
-						NSLog(@"commentArray count : %lu", [vposArray count]);
-						NSLog(@"OK");
-						
 #if DEBUG
-						[self.delegate stopIndicator];
+					[self.delegate stopIndicator];
 #endif
-					}
-					else
-						[self requestComments];
 				}
+				else
+					[self requestComments];
             }
             
             
@@ -771,15 +767,12 @@
 
 - (void)requestComments {
 	NSString *str = [NSString stringWithFormat:@"<thread thread=\"%@\" res_from=\"-1000\" version=\"20061206\" when=\"%ld\" waybackkey=\"%@\" user_id=\"%@\" />", self.threadId, currentTime, self.waybackKey, self.userId];
-	NSLog(@"comment request: %@", str);
+	//NSLog(@"comment request: %@", str);
 	//NSString *str = [text stringByAppendingString:eol];
 	const uint8_t *rawstring = (const uint8_t *)[str UTF8String];
 	//  NSString *rawstring2 = [NSString stringWithFormat:@"%@\0", rawstring];
-	[outputStream write:rawstring maxLength:strlen((char *)rawstring)];
-	uint8_t *rawString2[2];
-	rawString2[0] = 0;
-	rawString2[1] = 0;
-	[outputStream write:rawString2 maxLength:1];
+	[outputStream write:rawstring maxLength:strlen((char *)rawstring)+1];
+	[outputStream write:(const uint8_t *)"<ping>EOT</ping>" maxLength:strlen("<ping>EOT</ping>")+1];
 	//[outputStream close];
 }
 
