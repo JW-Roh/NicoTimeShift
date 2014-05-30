@@ -32,6 +32,7 @@
     lv = [[NSString alloc]initWithString: lvNum];
     isOpen = NO;
 	startOfComment = NO;
+	endOfComment = NO;
     self.keepString = @"";
 	self.waybackKey = nil;
 	dumpedString = nil;
@@ -618,12 +619,6 @@
                 
                 NSArray *temp = [xmlDoc nodesForXPath:@"/xml/chat" error:&error];
 				
-				if (temp.count == 0) {
-					NSLog(@"XML node count is 0\n%@\n", dockString);
-					[xmlDoc release];
-					break;
-				}
-				
 				if (needGetCurrTime) {
 					NSArray *dates = [xmlDoc nodesForXPath:@"/xml/chat/@date" error:&error];
 					
@@ -649,7 +644,7 @@
 					}
                 }
 				
-				if (!startOfComment && [[temp[0] stringValue] hasPrefix:@"/play "]) {
+				if (!startOfComment && (curChatTagCount == 0 || [[temp[0] stringValue] hasPrefix:@"/play "])) {
 					NSMutableString *tempString = [NSMutableString stringWithFormat:@"<?xml version='1.0' encoding='UTF-8'?>\n<packet>\n"];
 					
 					for (NSXMLElement *node in temp) {
@@ -675,15 +670,16 @@
 					NSLog(@"detect start of comments");
 				}
 				
-				temp = [xmlDoc nodesForXPath:@"/xml/chat[@premium=\"2\" and text()=\"/disconnect\"]" error:&error];
-                [xmlDoc release];
-                
-				BOOL endOfComment = NO;
-                if([temp count] != 0){
-					[dumpedString appendFormat:@"</packet>\n"];
-					endOfComment = YES;
+				if (!endOfComment) {
+					temp = [xmlDoc nodesForXPath:@"/xml/chat[@premium=\"2\" and text()=\"/disconnect\"]" error:&error];
+					[xmlDoc release];
 					
-					NSLog(@"detect end of comments");
+					if ([temp count] != 0){
+						[dumpedString appendFormat:@"</packet>\n"];
+						endOfComment = YES;
+						
+						NSLog(@"detect end of comments");
+					}
 				}
 				
 				NSLog(@"%ld comments saved", curChatTagCount);

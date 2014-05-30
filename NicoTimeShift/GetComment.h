@@ -28,6 +28,7 @@
 	NSInteger currentTime;
 	NSInteger queSheetTime;
 	BOOL startOfComment;
+	BOOL endOfComment;
 	NSInteger chatTagCount;
 	
 	NSMutableString *dumpedString;
